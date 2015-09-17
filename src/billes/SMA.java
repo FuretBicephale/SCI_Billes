@@ -7,12 +7,12 @@ import java.util.Observable;
 
 public class SMA extends Observable {
 	
-	int sleepLength;
-	Environnement env;
-	List<Agent> agents;
+	private int sleepLength;
+	private Environnement env;
+	private List<Agent> agents;
 	
-	public SMA(int width, int height, int sleepLength) {
-		this.env = new Environnement(width, height);
+	public SMA(int width, int height, boolean toric, int sleepLength) {
+		this.env = new Environnement(width, height, toric);
 		this.sleepLength = sleepLength;
 	}
 	
