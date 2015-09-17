@@ -10,7 +10,7 @@ public class Agent {
 	private int stepY;
 	private Environnement env;
 	
-	// Create the agent and choose a random position (cell must be empty) and direction in the environnement
+	// Create the agent and choose a random position (cell must be empty) and direction in the environment
 	public Agent(Environnement env) {
 		boolean positionFound = false;
 		this.env = env;
