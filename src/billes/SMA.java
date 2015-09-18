@@ -24,10 +24,16 @@ public class SMA extends Observable {
 	
 	public void addAgent() {
 		this.agents.add(new Agent(this.env));
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public int getNbAgents() {
 		return this.agents.size();
+	}
+	
+	public Agent getAgent(int i) {
+		return this.agents.get(i);
 	}
 
 	// Run the simulation for nbTours turns. Each turn, agents is shuffled and each agent are asked to make a decision.
@@ -39,6 +45,7 @@ public class SMA extends Observable {
 				a.decide();
 				Thread.sleep(sleepLength);
 				this.setChanged();
+				this.notifyObservers();
 			}			
 		}
 		

@@ -20,8 +20,8 @@ public class Agent {
 			int y = r.nextInt(env.getHeight());
 			
 			if (!env.isBusy(x, y)) {
-				posX=x;
-				posX=y;
+				this.posX = x;
+				this.posY = y;
 				positionFound = true;
 			}
 		}
@@ -35,6 +35,14 @@ public class Agent {
 	// Ask agent to make a decision for the current turn
 	public void decide() {
 		
+	}
+	
+	public int getPosX() {
+		return this.posX;
+	}
+	
+	public int getPosY() {
+		return this.posY;
 	}
 	
 }

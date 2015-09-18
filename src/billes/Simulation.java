@@ -37,10 +37,13 @@ public class Simulation {
 			printHelp();
 			return;
 		}
-		
+
+		Vue vue = new Vue(width, height);
+		vue.init();
 		
 		SMA sma = new SMA(width, height, toric, sleepLength);
 		sma.init();
+		sma.addObserver(vue);
 		
 		for(int i = 0; i < nbMarbles; i++) {
 			sma.addAgent();
