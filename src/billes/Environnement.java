@@ -19,6 +19,14 @@ public class Environnement {
 		this.espace = new Agent[width][height];
 	}
 	
+	public void putAgent(int x, int y, Agent a) {
+		this.espace[x][y] = a;
+	}
+	
+	public void removeAgent(int x, int y) {
+		this.espace[x][y] = null;
+	}
+	
 	public int getWidth() {
 		return this.width;
 	}

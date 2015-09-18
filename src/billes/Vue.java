@@ -1,6 +1,8 @@
 package billes;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,29 +13,42 @@ public class Vue implements Observer {
 
 	JFrame frame;
 	JPanel envPanel;
-	int width, height;
+	int width, height, marbleSize;
 	
-	public Vue(int width, int height) {
+	public Vue(int width, int height, int marbleSize) {
 		this.width = width;
 		this.height = height;
+		this.marbleSize = marbleSize;
 	}
 	
 	public void init() {
 		this.frame = new JFrame("SCI_Billes");
-		this.frame.setSize(new Dimension(width*10, height*10));
+		this.frame.setResizable(false);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setVisible(true);
 		
 		this.envPanel = new JPanel();
-		this.frame.setContentPane(this.envPanel);
+		this.envPanel.setPreferredSize(new Dimension(this.width * this.marbleSize, this.height * this.marbleSize));
+		this.envPanel.setBackground(Color.white);
 		
-		this.frame.setVisible(true);
+		this.frame.setContentPane(this.envPanel);
+		this.frame.pack();
 	}
 	
 	public void update(Observable arg0, Object arg1) {
 		SMA sma = (SMA)arg0;
+		Graphics g = this.envPanel.getGraphics();
+
+		this.envPanel.paint(g);
+		
+		g.setColor(Color.black);
+		for(int i = 0; i < this.width-1; i++) g.drawLine((i+1) * this.marbleSize, 0, (i+1) * this.marbleSize, height * this.marbleSize);
+		for(int i = 0; i < this.height-1; i++) g.drawLine(0, (i+1) * this.marbleSize, width * this.marbleSize, (i+1) * this.marbleSize);	
+		
 		for(int i = 0; i < sma.getNbAgents(); i++) {
 			Agent a = sma.getAgent(i);
-			this.envPanel.getGraphics().fillOval(a.getPosX()*10, a.getPosY()*10, 10, 10);
+			g.setColor(Color.red);
+			g.fillOval(a.getPosX()*this.marbleSize, a.getPosY()*this.marbleSize, this.marbleSize, this.marbleSize);
 		}
 	}
 
