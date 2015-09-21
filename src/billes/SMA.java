@@ -43,9 +43,11 @@ public class SMA extends Observable {
 			Collections.shuffle(this.agents);
 			for(Agent a : agents) {
 				a.decide();
-				this.setChanged();
-				this.notifyObservers();
-			}			
+			}
+			
+			this.setChanged();
+			this.notifyObservers();
+			
 			Thread.sleep(sleepLength);
 		}
 		
