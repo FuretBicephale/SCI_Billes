@@ -24,8 +24,8 @@ public class SMA extends Observable {
 	
 	public void addAgent() {
 		this.agents.add(new Agent(this.env));
-		this.setChanged();
-		this.notifyObservers();
+//		this.setChanged();
+//		this.notifyObservers();
 	}
 	
 	public int getNbAgents() {
@@ -38,14 +38,37 @@ public class SMA extends Observable {
 
 	// Run the simulation for nbTours turns. Each turn, agents is shuffled and each agent are asked to make a decision.
 	public void run(int nbTours) throws InterruptedException {
+		this.setChanged();
+		this.notifyObservers();
 		
 		for(int i = 0; i < nbTours; i++) {
 			Collections.shuffle(this.agents);
 			for(Agent a : agents) {
 				a.decide();
-				this.setChanged();
-				this.notifyObservers();
-			}			
+			}
+			
+			this.setChanged();
+			this.notifyObservers();
+			
+			Thread.sleep(sleepLength);
+		}
+		
+	}
+	
+	// Run the simulation indefinitely.
+	public void run() throws InterruptedException {
+		this.setChanged();
+		this.notifyObservers();
+		
+		while(true) {
+			Collections.shuffle(this.agents);
+			for(Agent a : agents) {
+				a.decide();
+			}
+			
+			this.setChanged();
+			this.notifyObservers();
+			
 			Thread.sleep(sleepLength);
 		}
 		

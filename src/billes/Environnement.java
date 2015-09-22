@@ -35,9 +35,8 @@ public class Environnement {
 		return this.height;
 	}
 	
-	// Return true if the cell (x, y) contains an Agent, false otherwise
-	public boolean isBusy(int x, int y) {
-		return this.espace[x][y] != null;
+	public Agent isBusy(int x, int y) {
+		return this.espace[x][y];
 	}
 	
 	public boolean isToric() {

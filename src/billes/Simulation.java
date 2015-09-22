@@ -16,10 +16,10 @@ public class Simulation {
 	// Use : Java Simulation envWidth envHeight marbleSize toric sleepLength nbMarbles nbTurns
 	public static void main(String[] args) {
 		
-		int width, height, marbleSize, sleepLength, nbMarbles, nbTurns;
-		boolean toric;
+		int width, height, marbleSize, sleepLength, nbMarbles, nbTurns=0;
+		boolean toric, sansFin = false;
 		
-		if(args.length != 7) {
+		if(args.length < 6 || args.length > 7) {
 			System.err.println("Error : Unexpected number of parameters");
 			printHelp();
 			return;
@@ -32,7 +32,10 @@ public class Simulation {
 			toric = Boolean.parseBoolean(args[3]);
 			sleepLength = Integer.parseInt(args[4]);
 			nbMarbles = Integer.parseInt(args[5]);
-			nbTurns = Integer.parseInt(args[6]);
+			if (args.length == 7)
+				nbTurns = Integer.parseInt(args[6]);
+			else
+				sansFin = true;
 		} catch(NumberFormatException e) {
 			System.err.println("Error : Incorrect parameters");
 			printHelp();
@@ -51,7 +54,10 @@ public class Simulation {
 		}
 		
 		try {
-			sma.run(nbTurns);
+			if (sansFin)
+				sma.run();
+			else
+				sma.run(nbTurns);
 		} catch (InterruptedException e) {
 			System.err.println("Error : Unexpected interruption during simulation");
 		}

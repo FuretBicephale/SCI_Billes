@@ -39,17 +39,28 @@ public class Vue implements Observer {
 		SMA sma = (SMA)arg0;
 		Graphics g = this.envPanel.getGraphics();
 
-		this.envPanel.paint(g);
+		//this.envPanel.paint(g);
 		
-		g.setColor(Color.black);
-		for(int i = 0; i < this.width-1; i++) g.drawLine((i+1) * this.marbleSize, 0, (i+1) * this.marbleSize, height * this.marbleSize);
-		for(int i = 0; i < this.height-1; i++) g.drawLine(0, (i+1) * this.marbleSize, width * this.marbleSize, (i+1) * this.marbleSize);	
+//		g.setColor(Color.black);
+//		for(int i = 0; i < this.width-1; i++) g.drawLine((i+1) * this.marbleSize, 0, (i+1) * this.marbleSize, height * this.marbleSize);
+//		for(int i = 0; i < this.height-1; i++) g.drawLine(0, (i+1) * this.marbleSize, width * this.marbleSize, (i+1) * this.marbleSize);	
 		
 		for(int i = 0; i < sma.getNbAgents(); i++) {
 			Agent a = sma.getAgent(i);
-			g.setColor(Color.red);
-			g.fillOval(a.getPosX()*this.marbleSize, a.getPosY()*this.marbleSize, this.marbleSize, this.marbleSize);
+			eraseMarble(a, g);
+			drawMarble(a, g);
 		}
+		
+	}
+	
+	private void drawMarble(Agent a, Graphics g) {
+		g.setColor(a.getColor());
+		g.fillOval(a.getPosX()*this.marbleSize, a.getPosY()*this.marbleSize, this.marbleSize, this.marbleSize);
+	}
+	
+	private void eraseMarble(Agent a, Graphics g) {
+		g.setColor(this.envPanel.getBackground());
+		g.fillOval(a.getOldPosX()*this.marbleSize, a.getOldPosY()*this.marbleSize, this.marbleSize, this.marbleSize);
 	}
 
 }
