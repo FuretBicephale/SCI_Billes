@@ -49,7 +49,7 @@ public class SMA extends Observable {
 			
 			this.setChanged();
 			this.notifyObservers();
-			
+
 			Thread.sleep(sleepLength);
 		}
 		
@@ -69,7 +69,6 @@ public class SMA extends Observable {
 			this.setChanged();
 			this.notifyObservers();
 			
-			Thread.sleep(sleepLength);
 		}
 		
 	}
